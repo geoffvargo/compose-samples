@@ -16,6 +16,7 @@
 
 package androidx.compose.samples.crane.home
 
+import android.content.res.*
 import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -52,6 +53,7 @@ import androidx.compose.samples.crane.details.launchDetailsActivity
 import androidx.compose.samples.crane.ui.CraneTheme
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -69,14 +71,21 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            CraneTheme {
-                val widthSizeClass = calculateWindowSizeClass(this).widthSizeClass
-
-                val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = Routes.Home.route) {
-                    composable(Routes.Home.route) {
-                        val mainViewModel = hiltViewModel<MainViewModel>()
-                        MainScreen(
+            extracted()
+        }
+    }
+    
+    @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO or Configuration.UI_MODE_TYPE_NORMAL)
+    @Composable
+    private fun extracted() {
+        CraneTheme {
+            val widthSizeClass = calculateWindowSizeClass(this).widthSizeClass
+            
+            val navController = rememberNavController()
+            NavHost(navController = navController, startDestination = Routes.Home.route) {
+                composable(Routes.Home.route) {
+                    val mainViewModel = hiltViewModel<MainViewModel>()
+                    MainScreen(
                             widthSize = widthSizeClass,
                             onExploreItemClicked = {
                                 launchDetailsActivity(context = this@MainActivity, item = it)
@@ -85,19 +94,18 @@ class MainActivity : ComponentActivity() {
                                 navController.navigate(Routes.Calendar.route)
                             },
                             mainViewModel = mainViewModel
-                        )
+                              )
+                }
+                composable(Routes.Calendar.route) {
+                    val parentEntry = remember(it) {
+                        navController.getBackStackEntry(Routes.Home.route)
                     }
-                    composable(Routes.Calendar.route) {
-                        val parentEntry = remember(it) {
-                            navController.getBackStackEntry(Routes.Home.route)
-                        }
-                        val parentViewModel = hiltViewModel<MainViewModel>(
+                    val parentViewModel = hiltViewModel<MainViewModel>(
                             parentEntry
-                        )
-                        CalendarScreen(onBackPressed = {
-                            navController.popBackStack()
-                        }, mainViewModel = parentViewModel)
-                    }
+                                                                      )
+                    CalendarScreen(onBackPressed = {
+                        navController.popBackStack()
+                    }, mainViewModel = parentViewModel)
                 }
             }
         }

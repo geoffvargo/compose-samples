@@ -16,21 +16,20 @@
 
 package com.example.jetlagged
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import com.example.jetlagged.ui.theme.JetLaggedTheme
+import android.os.*
+import androidx.activity.*
+import androidx.activity.compose.*
+import com.example.jetlagged.ui.theme.*
 
 class MainActivity : ComponentActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()
-        super.onCreate(savedInstanceState)
-        setContent {
-            JetLaggedTheme {
-                HomeScreenDrawer()
-            }
-        }
-    }
+	
+	override fun onCreate(savedInstanceState: Bundle?) {
+		enableEdgeToEdge()
+		super.onCreate(savedInstanceState)
+		setContent {
+			JetLaggedTheme {
+				HomeScreenDrawer()
+			}
+		}
+	}
 }
