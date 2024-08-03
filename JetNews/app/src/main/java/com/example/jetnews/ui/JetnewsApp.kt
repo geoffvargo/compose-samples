@@ -27,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.tooling.preview.*
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.jetnews.data.AppContainer
@@ -84,6 +85,16 @@ fun JetnewsApp(
                 )
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun PreviewJetnewsApp() {
+    JetnewsTheme {
+        JetnewsApp(
+                appContainer = AppContainer()
+                  )
     }
 }
 

@@ -50,9 +50,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
 import com.example.reply.R
 import com.example.reply.data.Email
+import com.example.reply.data.local.*
+import com.example.reply.ui.theme.*
+import com.example.reply.data.local.LocalEmailsDataProvider
+import com.example.reply.ui.utils.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -164,6 +169,20 @@ fun ReplyDockedSearchBar(
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun PreviewReplyDockedSearchBar() {
+    ReplyTheme {
+        ReplyDockedSearchBar(
+                emails = LocalEmailsDataProvider.allEmails,
+                onSearchItemSelected = {},
+                modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
+                            )
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EmailDetailAppBar(
@@ -226,4 +245,17 @@ fun EmailDetailAppBar(
             }
         }
     )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewEmailDetailAppBar() {
+    ReplyTheme {
+        EmailDetailAppBar(
+                email = (LocalEmailsDataProvider.allEmails[0]),
+                isFullScreen = false,
+                modifier = Modifier,
+                onBackPressed = {}
+                         )
+    }
 }

@@ -48,8 +48,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
 import com.example.reply.data.Email
+import com.example.reply.ui.theme.*
 
 @OptIn(
     ExperimentalFoundationApi::class,
@@ -166,5 +168,13 @@ fun SelectedProfileImage(modifier: Modifier = Modifier) {
                 .align(Alignment.Center),
             tint = MaterialTheme.colorScheme.onPrimary
         )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewSelectedProfileImage() {
+    ReplyTheme {
+        SelectedProfileImage()
     }
 }
