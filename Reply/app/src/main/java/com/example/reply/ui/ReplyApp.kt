@@ -26,14 +26,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.PermanentNavigationDrawer
 import androidx.compose.material3.rememberDrawerState
-import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
-import androidx.compose.material3.windowsizeclass.WindowSizeClass
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.*
+import androidx.compose.ui.unit.*
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -41,6 +41,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.window.layout.DisplayFeature
 import androidx.window.layout.FoldingFeature
+import com.example.reply.data.local.*
 import com.example.reply.ui.navigation.ModalNavigationDrawerContent
 import com.example.reply.ui.navigation.PermanentNavigationDrawerContent
 import com.example.reply.ui.navigation.ReplyBottomNavigationBar
@@ -48,6 +49,7 @@ import com.example.reply.ui.navigation.ReplyNavigationActions
 import com.example.reply.ui.navigation.ReplyNavigationRail
 import com.example.reply.ui.navigation.ReplyRoute
 import com.example.reply.ui.navigation.ReplyTopLevelDestination
+import com.example.reply.ui.theme.*
 import com.example.reply.ui.utils.DevicePosture
 import com.example.reply.ui.utils.ReplyContentType
 import com.example.reply.ui.utils.ReplyNavigationContentPosition
@@ -143,6 +145,19 @@ fun ReplyApp(
         navigateToDetail = navigateToDetail,
         toggleSelectedEmail = toggleSelectedEmail
     )
+}
+
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+@Preview(showBackground = true)
+@Composable
+fun PreviewReplyApp() {
+    ReplyTheme {
+        ReplyApp(
+                replyHomeUIState = ReplyHomeUIState(emails = LocalEmailsDataProvider.allEmails),
+                windowSize = WindowSizeClass.calculateFromSize(DpSize(700.dp, 500.dp)),
+                displayFeatures = emptyList()
+                )
+    }
 }
 
 @Composable

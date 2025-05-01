@@ -44,14 +44,17 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
 import androidx.window.layout.DisplayFeature
 import com.example.reply.R
 import com.example.reply.data.Email
+import com.example.reply.data.local.*
 import com.example.reply.ui.components.EmailDetailAppBar
 import com.example.reply.ui.components.ReplyDockedSearchBar
 import com.example.reply.ui.components.ReplyEmailListItem
 import com.example.reply.ui.components.ReplyEmailThreadItem
+import com.example.reply.ui.theme.*
 import com.example.reply.ui.utils.ReplyContentType
 import com.example.reply.ui.utils.ReplyNavigationType
 import com.google.accompanist.adaptive.HorizontalTwoPaneStrategy
@@ -209,6 +212,24 @@ fun ReplyEmailList(
     }
 }
 
+/*
+@Preview
+@Composable
+fun PreviewReplyEmailList() {
+    ReplyTheme {
+        ReplyEmailList(
+                emails = LocalEmailsDataProvider.allEmails.toList(),
+                openedEmail = null,
+                selectedEmailIds = emptySet(),
+                toggleEmailSelection = {},
+                emailLazyListState = rememberLazyListState(),
+                modifier = Modifier.fillMaxWidth(),
+                navigateToDetail =
+                      )
+    }
+}
+*/
+
 @Composable
 fun ReplyEmailDetail(
     email: Email,
@@ -231,5 +252,17 @@ fun ReplyEmailDetail(
         item {
             Spacer(Modifier.windowInsetsBottomHeight(WindowInsets.systemBars))
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewReplyEmailDetail() {
+    ReplyTheme {
+        ReplyEmailDetail(
+                email = LocalEmailsDataProvider.allEmails[0],
+//                isFullScreen = true,
+//                modifier = Modifier.fillMaxWidth()
+                        )
     }
 }

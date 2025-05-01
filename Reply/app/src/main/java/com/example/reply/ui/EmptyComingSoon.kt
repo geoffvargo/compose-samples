@@ -57,7 +57,7 @@ fun EmptyComingSoon(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun ComingSoonPreview() {
     EmptyComingSoon()
